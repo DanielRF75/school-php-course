@@ -9,15 +9,29 @@
 <body>
     <?php
         $books = [
-            "El principito",
-            "La dama de las camelias",
-            "El Quijote"
+            [
+                "title" => "La odisea",
+                "author" => "Homero",
+                "url" => "http://la_odisea"
+            ],
+            [
+                "title" => "La dama de las camelias",
+                "author" => "nose",
+                "url" => "http://la_dama"
+            ],
+            [
+                "title" => "El Quijote",
+                "author" => "Cerbantes",
+                "url" => "http://El_Quijote"
+            ]
         ];
     ?>
     <ul>
         <?php foreach ($books as $book) : ?>
-            <li> <?= $book ?> </li>
-        <?php endforeach; ?>
+            <a href="<?= $book['url'] ?>">
+                <li> <?= $book['title'] ?> </li>
+            </a>
+                <?php endforeach; ?>
 
     </ul>
 </body>
