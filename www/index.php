@@ -8,17 +8,17 @@
 </head>
 <body>
     <?php
-        $book = "El principito";
-        $readed = false;
-            
-        if ($readed) {
-            $message = "Ha leido $book";
-        } else {
-            $message = "NO ha leido $book";
-        }
+        $books = [
+            "El principito",
+            "La dama de las camelias",
+            "El Quijote"
+        ];
     ?>
-    <h1>
-        <?= $message ?>
-    </h1>
+    <ul>
+        <?php foreach ($books as $book) : ?>
+            <li> <?= $book ?> </li>
+        <?php endforeach; ?>
+
+    </ul>
 </body>
 </html>
