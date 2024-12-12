@@ -7,15 +7,11 @@
     
 </head>
 <body>
-    
-    
+    <h1><?= $buisness["name"] ?></h1>
     <ul>
-        <?php foreach ($filteredBooks as $book) : ?>
-                <a href="<?= $book['url'] ?>">
-                    <li> <?= $book['title'] ?> </li>
-                </a>
+        <?php foreach ($buisness["categorys"] as $category) : ?>
+            <li> <?= $category ?></li>
         <?php endforeach; ?>
-
     </ul>
 </body>
 </html>
