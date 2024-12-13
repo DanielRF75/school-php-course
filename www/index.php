@@ -1,6 +1,20 @@
 <?php
 require "functions.php";
-$heading = "Home";
+
+$url = parse_url($_SERVER['REQUEST_URI'])['path'];
 
 
-require "views/index.view.php";
+$routes = [
+    "/" => "controllers/index.php",
+    "/about" => "controllers/about.php",
+    "/contact" => "controllers/contact.php",
+];
+
+if(array_key_exists($url, $routes)){
+    require ($routes[$url]);
+}else{
+    http_response_code(404);
+    echo "404 Not found";
+    dd($_SERVER);
+}
+
