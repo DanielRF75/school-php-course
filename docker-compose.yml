@@ -1,4 +1,3 @@
-
 services:
   contendor_mysql:
     image: mysql:5.7
@@ -8,30 +7,29 @@ services:
       MYSQL_USER: daniel
       MYSQL_PASSWORD: dsecret
       MYSQL_ROOT_PASSWORD: root
-    volumes:
-      - ./mysql:/var/lib/mysql
-    expose:
-      - 3306
     ports:
       - 3306:3306
     networks:
       - mi_red
+    volumes:
+      - ./sql-scripts:/docker-entrypoint-initdb.d
+    command: >
+      --default-authentication-plugin=mysql_native_password
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: mi_phpmyadmin
     environment:
       PMA_HOST: contendor_mysql  # Nombre del servicio de MySQL
-      #MYSQL_ROOT_PASSWORD: root  # Debe coincidir con la contraseña de root del servicio MySQL
     ports:
       - "8081:80"
     networks:
       - mi_red
 
   apache-php:
-    build: 
+    build:
       context: ./Dockerfile  # Ajusta según la ruta donde esté tu Dockerfile
-      dockerfile: apache_file    # Asegúrate de que el nombre del Dockerfile coincida
+      dockerfile: apache_file  # Asegúrate de que el nombre del Dockerfile coincida
     container_name: apache-container
     volumes:
       - ./www/:/var/www/html
@@ -39,7 +37,7 @@ services:
       - 80
     ports:
       - 80:80
-    links: 
+    links:
       - contendor_mysql
     networks:
       - mi_red
